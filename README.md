@@ -5,8 +5,10 @@ Todo lo necesario para el taller del **26 de noviembre de 2026**: presentación,
 **Para participantes:** la guía y los retos están publicados en https://miguelangeljmz.github.io/lab-intro-databricks/
 
 ```
-TallerNoTecnico/
+lab-intro-databricks/
+├── index.html                          Página de inicio para participantes (GitHub Pages)
 ├── presentacion/taller-la-tinka.html   Presentación (abrir en Chrome; F = pantalla completa)
+├── presentacion/taller-la-tinka.pdf    La misma presentación en PDF (sin animaciones)
 ├── setup/00_setup_taller               Notebook que crea todo el laboratorio
 ├── setup/99_limpieza                   Notebook que borra todo después del taller
 ├── setup/recursos/                     Datos sintéticos, Genie, dashboard (lo usa el setup)
@@ -27,13 +29,12 @@ El material del instructor (guía, solucionario del reto y tarjetas con las preg
 
 **Pasos:**
 
-1. Subir las carpetas `setup/` y `app/` al workspace, juntas y dentro de la misma carpeta padre. Hay dos formas:
-   - **Git folder:** si el material está en un repositorio, usar *Workspace → Create → Git folder*.
-   - **CLI:** `databricks workspace import-dir setup /Workspace/Users/<tu-usuario>/TallerLaTinka/setup` y lo mismo para `app`.
-2. Abrir `setup/00_setup_taller` y conectarlo a **Serverless**.
-3. Llenar los tres campos de arriba: `catalogo`, `esquema` y `grupo_participantes`. El cuarto campo, `fecha_taller`, ya viene con 2026-11-26.
-4. Hacer clic en **Run all**. Tarda unos 6 minutos.
-5. Al final el notebook muestra las URLs de Genie, del dashboard y de la app, junto con las tarjetas del Lab 1 con sus valores reales.
+1. En el workspace, ir a **Workspace → Create → Git folder**.
+2. En *Git repository URL* pegar `https://github.com/MiguelAngelJMZ/lab-intro-databricks` y hacer clic en **Create Git folder**. Como el repositorio es público, no hace falta configurar credenciales de Git.
+3. Dentro de la carpeta clonada, abrir `setup/00_setup_taller` y conectarlo a **Serverless**.
+4. Llenar los tres campos de arriba: `catalogo`, `esquema` y `grupo_participantes`. El cuarto campo, `fecha_taller`, ya viene con 2026-11-26.
+5. Hacer clic en **Run all**. Tarda unos 6 minutos.
+6. Al final el notebook muestra las URLs de Genie, del dashboard y de la app, junto con las tarjetas del Lab 1 con sus valores reales.
 
 El notebook se puede correr varias veces: no duplica nada. **Ojo:** cada corrida vacía el marcador del reto de la app.
 
@@ -51,4 +52,4 @@ Todo queda en la carpeta `Taller La Tinka` del usuario que corrió el setup. Los
 
 ### Después del taller
 
-Corre `setup/99_limpieza` y escribe `BORRAR` en el campo de confirmación. Elimina la app, el dashboard, Genie, el warehouse y el esquema. El catálogo solo se borra si lo creó el setup.
+Corre `setup/99_limpieza` y escribe `BORRAR` en el campo de confirmación. Elimina la app, el dashboard, Genie, el warehouse y el esquema. El catálogo solo se borra si lo creó el setup. Al final se puede borrar también el Git folder.
