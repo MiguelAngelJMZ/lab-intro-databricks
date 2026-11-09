@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía del participante · Taller Databricks La Tinka</title>
+<style>
+  body { font-family: 'DM Sans', Arial, sans-serif; color: #0B2026; background: #F9F7F4; margin: 0; padding: 40px; line-height: 1.5; }
+  main { max-width: 860px; margin: 0 auto; }
+  h1 { font-size: 34px; margin: 0; letter-spacing: -0.01em; } .sub { color: #5B7079; margin: 4px 0 28px; }
+  section { background: #fff; border: 1px solid #DCD9D3; border-radius: 12px; padding: 22px 28px; margin-bottom: 20px; break-inside: avoid; }
+  h2 { font-size: 22px; margin: 0 0 4px; } h2::before { content: ''; display: inline-block; width: 26px; height: 3px; background: #FF3621; margin-right: 10px; vertical-align: middle; }
+  .meta { font-family: 'DM Mono', monospace; font-size: 12px; color: #5B7079; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; }
+  ol { padding-left: 22px; } li { margin: 6px 0; }
+  .url { display: block; font-family: 'DM Mono', monospace; background: #EEEDE9; border-radius: 6px; padding: 8px 12px; margin: 6px 0 0; color: #5B7079; }
+  .tip { background: #F2F7FB; border-left: 3px solid #2272B4; padding: 8px 12px; border-radius: 4px; font-size: 15px; }
+  q { font-style: italic; }
+  @media print { body { background: #fff; padding: 0; } section { border-color: #BFC5C7; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Guía del participante</h1>
+<p class="sub">Taller de iniciación en Databricks · La Tinka · 26 de noviembre de 2026</p>
+
+<section>
+  <h2>Antes de empezar</h2>
+  <ol>
+    <li>Entra a Databricks con tu usuario de La Tinka.
+      <span class="url">Workspace: ______________________________</span></li>
+    <li>Arriba a la izquierda cambia a <b>Databricks One</b>. Ahí aparece todo lo que te compartieron.</li>
+    <li>No necesitas instalar nada ni escribir código. El cómputo se enciende solo.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Lab 1 · Genie al revés</h2>
+  <div class="meta">35 minutos · individual</div>
+  <ol>
+    <li>En Databricks One abre el espacio de Genie <b>Mesa de servicio</b>.</li>
+    <li>Prueba una de las preguntas de ejemplo y luego haz clic en <b>Show code</b> para ver el SQL que escribió Genie.</li>
+    <li><b>Reto:</b> cada tarjeta muestra una respuesta, pero no la pregunta. Escribe en Genie la pregunta que da <b>exactamente</b> ese resultado.</li>
+  </ol>
+  <p class="tip">Lo que más ayuda: decir el periodo (<q>el mes pasado</q>), decir cómo agrupar (<q>por equipo</q>) y usar las palabras del negocio (<q>P1</q>, <q>dentro del SLA</q>).</p>
+  <p>Cada tarjeta dice qué muestra y trae 2 pistas libres. Las estrellas indican la dificultad. Gana quien termine primero las 6 tarjetas.</p>
+</section>
+
+<section>
+  <h2>Lab 2 · Extender un dashboard</h2>
+  <div class="meta">35 minutos · individual</div>
+  <ol>
+    <li>Abre el dashboard <b>Mesa de servicio – Seguimiento</b>. Navega las 3 páginas y prueba los filtros.</li>
+    <li>Haz clic en <b>Clone</b> y nómbralo <b>Mesa de servicio – tu nombre</b>. Así trabajas en tu propia copia.</li>
+    <li><b>Con Genie Code:</b> en modo edición abre el asistente y pide <q>Agrega en la página Operación una gráfica de barras con el tiempo promedio de resolución en horas por prioridad</q>. Luego pídele <q>ordénala de mayor a menor y ponle etiquetas de datos</q>.</li>
+    <li><b>A mano:</b> <i>Add a visualization</i> → dataset <code>incidencias</code> → tipo <b>Pie</b> → Color = <code>estatus</code>, Angle = <code>COUNT(*)</code>.</li>
+    <li><b>Reto:</b> replica la gráfica <b>Proyectos en riesgo</b> que está en pantalla.</li>
+    <li>Publica tu copia y compártela con la persona de al lado.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Lab 3 · Laboratorio de IA</h2>
+  <div class="meta">35 minutos · individual</div>
+  <ol>
+    <li>Entra a la app:
+      <span class="url">App: ______________________________</span></li>
+    <li>Recorre las pestañas 1 a 5. En cada una abre <b>Ver SQL</b>: es la función de IA que se ejecuta por detrás.</li>
+    <li><b>Reto</b> (pestaña Reto):
+      <ul>
+        <li><b>Ronda 1:</b> explícale a la IA qué entra en cada una de las 5 categorías. La app clasifica 30 incidencias y gana quien tenga más aciertos.</li>
+        <li><b>Ronda 2:</b> define cómo pedirle a la IA el canal, el juego y el monto de 10 tickets.</li>
+        <li><b>Ronda 3:</b> escribe la instrucción para que la IA responda a un cliente molesto. El grupo vota la respuesta más creativa.</li>
+      </ul>
+    </li>
+  </ol>
+  <p class="tip">Las descripciones con ejemplos concretos suben el puntaje. Si un caso puede caer en dos categorías, aclara en cuál va. Cada ronda trae una pista con ejemplos.</p>
+</section>
+
+<section>
+  <h2>¿Y en mi trabajo?</h2>
+  <p>Anota en un post-it un reporte o una tarea que hoy haces a mano y que te gustaría preguntarle a tus datos.</p>
+  <span class="url">Mi tarea: __________________________________________________</span>
+</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# Plantilla de referencia. El notebook setup/00_setup_taller genera el app.yaml real
+# con el catálogo y esquema elegidos al copiar la app a la carpeta del taller.
+command: ["streamlit", "run", "app.py"]
+env:
+  - name: DATABRICKS_WAREHOUSE_ID
+    valueFrom: sql-warehouse
+  - name: TALLER_MODELO
+    valueFrom: serving-endpoint
+  - name: TALLER_CATALOGO
+    value: "la_tinka_taller"
+  - name: TALLER_ESQUEMA
+    value: "mesa_servicio"
+  - name: TALLER_FECHA
+    value: "2026-11-26"

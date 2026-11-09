@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Lab 2 · Reto "Replica la visual"</title>
+<style>
+  body { font-family: 'DM Sans', Arial, sans-serif; color: #0B2026; background: #F9F7F4; margin: 0; padding: 40px; }
+  .fila { display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; max-width: 1240px; }
+  h1 { font-size: 28px; margin: 0 0 6px; } .sub { color: #5B7079; margin: 0 0 24px; }
+  .widget { background: #fff; border-radius: 8px; padding: 18px 22px; box-shadow: 0 1px 2px rgba(11,32,38,.08); }
+  .widget h2 { font-size: 16px; font-weight: 500; margin: 0 0 8px; }
+  .pistas { background: #fff; border-radius: 12px; border: 1px solid #DCD9D3; padding: 20px 24px; }
+  .pistas h3 { margin: 0 0 10px; font-size: 18px; }
+  .pistas details { border-top: 1px solid #EEEDE9; padding: 10px 0; }
+  .pistas summary { cursor: pointer; font-weight: 500; }
+  .pistas details p { margin: 6px 0 0 22px; color: #2F4A52; }
+  .ficha { margin: 0 0 16px; font-size: 15px; color: #2F4A52; background: #F9F7F4; border-radius: 8px; padding: 10px 12px; }
+  .logrado { margin-top: 18px; font-size: 14px; color: #2F4A52; }
+</style>
+</head>
+<body>
+<h1>Lab 2 · Reto "Replica la visual"</h1>
+<p class="sub">Reproduce esta gráfica en tu copia del dashboard, en la página <b>Proyectos</b>. Usa Genie Code o hazlo a mano.</p>
+<div class="fila">
+  <div class="widget" id="objetivo">
+    <h2>Proyectos en riesgo</h2>
+    <svg viewBox="0 0 720 360" width="100%" font-family="DM Sans, Arial, sans-serif" font-size="13">
+      <!-- eje y rejilla: 0..100 sobre x=230..690 -->
+      <g fill="#5B7079" text-anchor="middle">
+        <line x1="230" y1="20" x2="230" y2="320" stroke="#DCD9D3"/><text x="230" y="340">0</text>
+        <line x1="345" y1="20" x2="345" y2="320" stroke="#EEEDE9"/><text x="345" y="340">25</text>
+        <line x1="575" y1="20" x2="575" y2="320" stroke="#EEEDE9"/><text x="575" y="340">75</text>
+        <line x1="690" y1="20" x2="690" y2="320" stroke="#EEEDE9"/><text x="690" y="340">100</text>
+      </g>
+      <g id="barras"></g>
+      <line x1="460" y1="14" x2="460" y2="320" stroke="#FF3621" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="466" y="26" fill="#FF3621" font-size="12">50%</text>
+      <text x="460" y="358" text-anchor="middle" fill="#5B7079" font-size="12">% avance</text>
+    </svg>
+  </div>
+  <div class="pistas">
+    <h3>Qué muestra</h3>
+    <p class="ficha">Barras horizontales con el <b>% de avance</b> (0 a 100) de cada proyecto. Son <b>7 proyectos</b>, ordenados de menor a mayor avance, con una <b>línea de referencia punteada en 50</b>. Título: <i>Proyectos en riesgo</i>.</p>
+    <h3>Pistas</h3>
+    <p style="margin:0 0 8px;color:#5B7079;font-size:14px">Son libres. Juntas describen toda la visual: con ellas puedes escribir tu propia instrucción para Genie Code o armarla a mano.</p>
+    <details><summary>Pista 1 · Dónde va</summary><p>En la página <b>Proyectos</b> de tu copia del dashboard.</p></details>
+    <details><summary>Pista 2 · Qué datos usa</summary><p>El dataset <code>proyectos</code>. Los campos son <code>nombre</code> y <code>pct_avance</code>.</p></details>
+    <details><summary>Pista 3 · Qué filtra</summary><p>Solo los proyectos que vencen en los <b>próximos 30 días</b>. El dataset ya trae la columna <code>dias_para_compromiso</code>: usa los valores de 1 a 30.</p></details>
+    <details><summary>Pista 4 · Cómo se ordena</summary><p>De <b>menor a mayor</b> % de avance.</p></details>
+    <details><summary>Pista 5 · Qué formato tiene</summary><p>Barras <b>horizontales</b>: el % de avance va en el eje X y el proyecto en el eje Y. Agrega una <b>línea de referencia en 50</b>.</p></details>
+    <p class="logrado"><b>Logrado</b> = mismos 7 proyectos, mismo orden y la línea de 50 visible.</p>
+  </div>
+</div>
+<script>
+  // Proyectos que vencen en los 30 días siguientes al 26/11/2026 (de la tabla proyectos)
+  const datos = [["Renovación de terminales POS", 15], ["Migración del portal de agentes", 22], ["Nueva app Tinka 3.0", 35],
+                 ["Pagos con Yape en web", 41], ["Data lake de ventas", 64], ["Chatbot de atención al cliente", 78],
+                 ["Monitoreo 24/7 de sorteos", 90]];
+  const g = document.getElementById("barras"), alto = 300 / datos.length;
+  g.innerHTML = datos.map(([n, v], i) => {
+    const y = 20 + i * alto, w = v * 4.6;
+    return `<text x="220" y="${y + alto / 2 + 4}" text-anchor="end" fill="#0B2026">${n}</text>
+            <rect x="230" y="${y + 8}" width="${w}" height="${alto - 16}" rx="2" fill="#2272B4"/>
+            <text x="${236 + w}" y="${y + alto / 2 + 4}" fill="#0B2026">${v}</text>`;
+  }).join("");
+</script>
+</body>
+</html>

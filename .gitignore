@@ -1,0 +1,15 @@
+# Material del instructor: respuestas de los retos y notas
+materiales/guia_instructor.md
+materiales/solucionario_reto_lab3.md
+materiales/tarjetas_lab1_instructor.html
+materiales/lab1_respuestas.json
+
+# Documento original del cliente y notas de trabajo internas
+Taller de iniciación en D.pdf
+docs/
+
+# Sistema y Python
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
