@@ -2,6 +2,8 @@
 
 Todo lo necesario para el taller del **26 de noviembre de 2026**: presentación, laboratorio y materiales.
 
+**Para participantes:** la guía y los retos están publicados en https://miguelangeljmz.github.io/lab-intro-databricks/
+
 ```
 TallerNoTecnico/
 ├── presentacion/taller-la-tinka.html   Presentación (abrir en Chrome; F = pantalla completa)
