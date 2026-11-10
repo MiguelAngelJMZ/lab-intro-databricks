@@ -3,8 +3,9 @@
 Uso:
     python3 generar_tarjetas.py lab1_respuestas.json
 
-`lab1_respuestas.json` sale de la tabla taller_config (claves lab1_tarjeta_N) que deja
-el notebook de setup. Produce dos archivos junto al JSON:
+`lab1_respuestas.json` tiene el resultado de las 6 preguntas solución (setup/recursos/consultas.py)
+sobre los datos del taller. Los datos son deterministas, así que el resultado es el mismo en
+cualquier workspace. Produce dos archivos junto al JSON:
   - tarjetas_lab1.html             para participantes (sin la pregunta, pistas ocultas)
   - tarjetas_lab1_instructor.html  con la pregunta solución
 Ábrelos en Chrome; para imprimir usa Cmd+P con "Gráficos de fondo" activado.

@@ -34,7 +34,7 @@ El material del instructor (guía, solucionario del reto y tarjetas con las preg
 3. Dentro de la carpeta clonada, abrir `setup/00_setup_taller` y conectarlo a **Serverless**.
 4. Llenar los tres campos de arriba: `catalogo`, `esquema` y `grupo_participantes`. El cuarto campo, `fecha_taller`, ya viene con 2026-11-26.
 5. Hacer clic en **Run all**. Tarda unos 6 minutos.
-6. Al final el notebook muestra las URLs de Genie, del dashboard y de la app, junto con las tarjetas del Lab 1 con sus valores reales.
+6. Al terminar, Genie, el dashboard y la app quedan en la carpeta `Taller La Tinka` del usuario que corrió el setup.
 
 El notebook se puede correr varias veces: no duplica nada. **Ojo:** cada corrida vacía el marcador del reto de la app.
 

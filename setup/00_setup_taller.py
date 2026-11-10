@@ -16,7 +16,7 @@
 # MAGIC ### Cómo usarlo
 # MAGIC 1. Llena los campos de arriba (**catalogo**, **esquema**, **grupo_participantes**).
 # MAGIC 2. Conecta el notebook a **Serverless** y haz clic en **Run all**.
-# MAGIC 3. Al final verás las direcciones de Genie, el dashboard y la app, junto con las tarjetas del Lab 1.
+# MAGIC 3. Al terminar, Genie, el dashboard y la app quedan en la carpeta **Taller La Tinka** de tu usuario.
 # MAGIC
 # MAGIC Puedes correrlo varias veces: no duplica nada, solo actualiza. **Ojo:** cada corrida vacía el marcador del reto de la app.
 # MAGIC
@@ -471,40 +471,3 @@ dar_permiso("dashboards", DASHBOARD_ID, "CAN_RUN")
 ok("Dashboard: CAN RUN (ver y clonar)")
 dar_permiso("apps", NOMBRE_APP, "CAN_USE")
 ok("App: CAN USE")
-
-# COMMAND ----------
-
-# MAGIC %md ## Paso 11 – Resumen y tarjetas del Lab 1
-
-# COMMAND ----------
-
-paso(11, "Resumen")
-URL_GENIE = f"{HOST}/genie/rooms/{GENIE_ID}"
-URL_DASHBOARD = f"{HOST}/dashboardsv3/{DASHBOARD_ID}/published"
-
-tarjetas = []
-for i, (nivel, pregunta, sentencia) in enumerate(consultas.preguntas_lab1(CATALOGO, ESQUEMA, FECHA_TALLER.isoformat()), 1):
-    pdf = spark.sql(sentencia).toPandas()
-    tarjetas.append((i, nivel, pregunta, pdf))
-    config_guardar(f"lab1_tarjeta_{i}", pdf.to_json(orient="records", date_format="iso", force_ascii=False))
-
-celdas = "".join(
-    f"""<div style="border:1px solid #DCE0E2;border-radius:8px;padding:16px;margin:8px 0;background:#fff">
-<div style="font-size:12px;color:#5A6F77">Tarjeta {i} · {'⭐' * nivel}</div>
-<div style="margin:6px 0 10px;font-size:13px;color:#5A6F77">Pregunta solución (solo instructor): <b>{p}</b></div>
-{pdf.to_html(index=False, border=0)}</div>"""
-    for i, nivel, p, pdf in tarjetas)
-
-displayHTML(f"""
-<div style="font-family:'DM Sans',Arial,sans-serif;color:#0B2026;max-width:960px">
-<h2 style="margin-bottom:4px">✅ Taller listo</h2>
-<p>Fecha de referencia de los datos: <b>{FECHA_TALLER.strftime('%d/%m/%Y')}</b> · Grupo: <b>{GRUPO}</b> · Modelo de IA: <b>{MODELO}</b></p>
-<table style="border-collapse:collapse">
-<tr><td style="padding:4px 12px 4px 0">Lab 1 · Genie</td><td><a href="{URL_GENIE}" target="_blank">{URL_GENIE}</a></td></tr>
-<tr><td style="padding:4px 12px 4px 0">Lab 2 · Dashboard</td><td><a href="{URL_DASHBOARD}" target="_blank">{URL_DASHBOARD}</a></td></tr>
-<tr><td style="padding:4px 12px 4px 0">Lab 3 · App</td><td><a href="{APP_URL}" target="_blank">{APP_URL}</a></td></tr>
-<tr><td style="padding:4px 12px 4px 0">Datos</td><td>{CATALOGO}.{ESQUEMA}</td></tr>
-</table>
-<h3 style="margin-top:24px">Tarjetas del Lab 1 (valores reales)</h3>
-{celdas}
-</div>""")

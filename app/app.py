@@ -230,6 +230,10 @@ with tabs[4]:
 # ---------------------------------------------------------------- 6. Reto
 with tabs[5]:
     st.subheader("🏆 El mejor clasificador de La Tinka")
+    # Streamlit borra el estado de los campos que no se dibujan: al cambiar de ronda se perdería lo escrito.
+    # Reasignarlos en cada ejecución los conserva mientras dure la sesión.
+    for clave in [k for k in st.session_state if k.startswith(("r1_", "r2_", "r3_")) and not k.endswith("_btn")]:
+        st.session_state[clave] = st.session_state[clave]
     ronda = st.radio("Ronda", ["1 · Explica las categorías ⭐", "2 · Extrae los datos ⭐⭐", "3 · Responde como La Tinka ⭐⭐⭐",
                                "Votación de la ronda 3", "Marcador"], horizontal=True, label_visibility="collapsed")
 
@@ -266,15 +270,20 @@ with tabs[5]:
             aciertos = int(df["acierto"].sum())
             contador.caption(f"Envíos usados: {usados + 1}/{MAX_ENVIOS}")
             guardar_intento(1, {"descripciones": descripciones}, {"aciertos": aciertos}, aciertos)
-            st.metric("Aciertos", f"{aciertos} / 30", f"{aciertos / 30:.0%}")
-            st.dataframe(df.groupby("categoria_real")["acierto"].agg(["sum", "count"])
-                         .rename(columns={"sum": "aciertos", "count": "incidencias"}).rename_axis("categoría"), use_container_width=True)
-            fallos = df[~df["acierto"]]
-            if not fallos.empty:
+            st.session_state["res_r1"] = {
+                "aciertos": aciertos,
+                "por_categoria": df.groupby("categoria_real")["acierto"].agg(["sum", "count"])
+                                   .rename(columns={"sum": "aciertos", "count": "incidencias"}).rename_axis("categoría"),
+                "fallos": df[~df["acierto"]][["descripcion", "categoria_real", "categoria_ia"]]
+                          .rename(columns={"descripcion": "incidencia", "categoria_real": "categoría correcta", "categoria_ia": "la IA dijo"}),
+            }
+        if res := st.session_state.get("res_r1"):
+            st.markdown("**Resultado de tu último envío**")
+            st.metric("Aciertos", f"{res['aciertos']} / 30", f"{res['aciertos'] / 30:.0%}")
+            st.dataframe(res["por_categoria"], use_container_width=True)
+            if not res["fallos"].empty:
                 st.markdown("**Dónde se equivocó la IA** (úsalo para mejorar tus descripciones)")
-                st.dataframe(fallos[["descripcion", "categoria_real", "categoria_ia"]]
-                             .rename(columns={"descripcion": "incidencia", "categoria_real": "categoría correcta", "categoria_ia": "la IA dijo"}),
-                             hide_index=True, use_container_width=True)
+                st.dataframe(res["fallos"], hide_index=True, use_container_width=True)
         ver_sql(sentencia)
 
     # ---------- Ronda 2
@@ -326,8 +335,11 @@ with tabs[5]:
                                   "monto": f"{'✅' if ok_monto else '❌'} {monto}"})
                 contador.caption(f"Envíos usados: {usados + 1}/{MAX_ENVIOS}")
                 guardar_intento(2, esquema, {"aciertos": aciertos}, aciertos)
-                st.metric("Campos correctos", f"{aciertos} / 30", f"{aciertos / 30:.0%}")
-                st.dataframe(pd.DataFrame(filas), hide_index=True, use_container_width=True)
+                st.session_state["res_r2"] = {"aciertos": aciertos, "filas": pd.DataFrame(filas)}
+        if res := st.session_state.get("res_r2"):
+            st.markdown("**Resultado de tu último envío**")
+            st.metric("Campos correctos", f"{res['aciertos']} / 30", f"{res['aciertos'] / 30:.0%}")
+            st.dataframe(res["filas"], hide_index=True, use_container_width=True)
         ver_sql(sentencia)
 
     # ---------- Ronda 3
@@ -352,8 +364,10 @@ with tabs[5]:
                 respuesta = consultar(sentencia, {"instruccion": instruccion, "comentario": caso})["respuesta"][0]
             contador.caption(f"Envíos usados: {usados + 1}/{MAX_ENVIOS}")
             guardar_intento(3, {"instruccion": instruccion}, {"respuesta": respuesta}, 0)
-            st.markdown("**Respuesta enviada a votación:**")
-            st.markdown(respuesta)
+            st.session_state["res_r3"] = respuesta
+        if res := st.session_state.get("res_r3"):
+            st.markdown("**Respuesta enviada a votación (tu último envío):**")
+            st.markdown(res)
         ver_sql(sentencia.replace(":comentario", lit(caso)).replace(":instruccion", "'<tu instrucción>'"))
 
     # ---------- Votación
