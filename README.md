@@ -21,9 +21,8 @@ El material del instructor (guía, solucionario del reto y tarjetas con las preg
 **Antes de empezar**, el equipo de La Tinka necesita:
 
 1. Un workspace con **Unity Catalog** y **SQL Warehouse serverless** habilitados.
-2. **Genie, Dashboards AI/BI, Databricks Assistant y las funciones de IA** habilitados.
-3. Un **grupo de cuenta** con los participantes (por ejemplo `taller_iniciacion`), asignado al workspace. Cada participante debe haber iniciado sesión al menos una vez.
-4. Que la persona que corra el setup sea **administradora del workspace** y pueda crear catálogos.
+2. Un **grupo de cuenta** con los participantes (por ejemplo `taller_iniciacion`), asignado al workspace. Cada participante debe haber iniciado sesión al menos una vez.
+3. Que la persona que corra el setup sea **administradora del workspace** y pueda crear catálogos.
 
 **Pasos:**
 
